@@ -1,58 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi Pemesanan Kamar Hotel Sederhana
+**Uji Kompetensi Sertifikasi BNSP - Skema Junior Web Developer (FR.SKEMA-02-07 / FR.IA.02)**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 📌 Deskripsi Proyek
+Aplikasi berbasis web untuk sistem reservasi / pemesanan kamar hotel sederhana yang dibangun sesuai dengan spesifikasi dan instrumen demonstrasi praktik **FR.IA.02 Tugas Praktik Demonstrasi - Junior Web Developer (LSP Telematika / Informatika)**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistem ini melayani pemilihan kamar hotel, simulasi perhitungan tarif pemesanan otomatis dengan ketentuan diskon dan layanan breakfast, validasi input formulir secara menyeluruh, penyimpanan data transaksi ke database, serta penyajian bukti pemesanan / nota resume transaksi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Fitur Aplikasi (Berdasarkan Spesifikasi Dokumen BNSP)
 
-## Learning Laravel
+1. **Menu Navigasi Utama:**
+   - **Produk:** Menampilkan 3 jenis kamar (**Standar**, **Deluxe**, **Executif / Family**) lengkap dengan foto dan video tur interaktif.
+   - **Daftar Harga:** Tabel transparan tarif kamar per malam, kapasitas, fasilitas, serta informasi penawaran khusus diskon.
+   - **Tentang Kami:** Uraian profil hotel, alamat lengkap, nomor kontak/telepon, serta alamat email reservasi.
+   - **Pesan Kamar:** Formulir pemesanan kamar hotel sesuai struktur antarmuka dialog BNSP.
+   - **Data Pesanan:** Rekapitulasi tabel riwayat seluruh data pemesanan yang tersimpan di sistem.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Form Pemesanan & Aturan Validasi:**
+   - **Nama Pemesan:** Wajib diisi dengan nama lengkap pemesan.
+   - **Jenis Kelamin:** Pilihan radio button *Laki-laki* atau *Perempuan*.
+   - **Nomor Identitas:** Wajib 16 digit angka (NIK/KTP). Jika tidak valid, muncul pesan kesalahan: `isian salah..data harus 16 digit`.
+   - **Tipe Kamar:** Pilihan *Standar* (Rp 500.000), *Deluxe* (Rp 1.000.000), atau *Family / Executif* (Rp 1.500.000).
+   - **Harga:** Terisi otomatis sesuai tarif tipe kamar yang dipilih.
+   - **Tanggal Pesan:** Format tanggal (dd/mm/yyyy).
+   - **Durasi Menginap:** Wajib diisi angka. Jika bukan angka, muncul pesan: `harus isi angka`.
+   - **Termasuk Breakfast:** Checkbox dicentang berarti *Ya* (tambahan biaya Rp 80.000).
+   - **Total Bayar:** Terisi otomatis saat pengguna menekan tombol **[Hitung Total Bayar]**.
+     - **Ketentuan Diskon:** Jika lama menginap **3 hari atau lebih** (`durasi >= 3`), mendapatkan **diskon 10%** dari subtotal kamar.
+     - **Ketentuan Breakfast:** Tambahan tarif sarapan **Rp 80.000 / hari** jika dicentang.
+     - **Simulasi Presisi Contoh Kasus Resmi BNSP (Hal. 2 & 3):**
+       - Kamar Standar: Rp 500.000 × 3 hari = Subtotal Rp 1.500.000
+       - Diskon 10%: − Rp 150.000
+       - Breakfast: 3 hari × Rp 80.000 = + Rp 240.000
+       - **Total Bayar: Rp 1.590.000** (Tepat dan identik dengan lembar soal demonstrasi)
+   - **Aksi Tombol:**
+     - `[Hitung Total Bayar]`: Melakukan kalkulasi subtotal, diskon, dan total bayar.
+     - `[Simpan]`: Menyimpan data ke database dan menampilkan bukti pemesanan resume.
+     - `[Cancel]`: Mengosongkan formulir pemesanan kembali ke kondisi awal.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. **Penyajian Bukti Pemesanan (Resume Transaksi):**
+   - Menampilkan resume transaksi dalam format presisi dokumen BNSP butir C.2.b:
+     ```text
+     Nama Pemesan      : Andri Santosa
+     Nomor Identitas   : 3275091210770004
+     Jenis Kelamin     : Laki-laki
+     Tipe Kamar        : Standar
+     Durasi Penginapan : 3 Hari
+     Discount          : 10%
+     Total Bayar       : 1.590.000
+     ```
+   - Dilengkapi fitur cetak nota (*print*) langsung ke format printer atau PDF.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 📁 Struktur Hirarki Direktori & Sumber Daya Pemrograman
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```text
+pretest_bnsp/
+│
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── PesananController.php   # Controller logika bisnis, kalkulasi diskon & CRUD
+│   └── Models/
+│       └── pesanan.php                 # Model Eloquent data pemesanan kamar hotel
+│
+├── bootstrap/
+│   └── app.php                         # Inisialisasi framework Laravel
+│
+├── config/                             # Konfigurasi sistem (database, app, session)
+│
+├── database/
+│   ├── migrations/                     # Skema migrasi tabel database 'pesanans'
+│   │   ├── 2026_07_21_014628_create_pesanans_table.php
+│   │   ├── 2026_07_21_021947_add_tanggal_pesan_to_pesanans_table.php
+│   │   └── 2026_07_21_030000_add_discount_to_pesanans_table.php
+│   └── seeders/                        # Data awal seeder pesanan untuk demonstrasi
+│
+├── public/                             # File statis publik (aset gambar, favicon, index.php)
+│
+├── resources/
+│   └── views/
+│       ├── welcome.blade.php           # Halaman utama (Hero, Produk, Harga, Tentang Kami, Form & Rekap)
+│       └── pesanan/
+│           ├── create.blade.php        # Form pemesanan standalone format BNSP Halaman 2
+│           ├── show.blade.php          # Tampilan bukti pemesanan format BNSP Halaman 3 (b)
+│           ├── edit.blade.php          # Form pembaharuan data pemesanan
+│           └── index.blade.php         # Halaman tabel riwayat transaksi & modal invoice
+│
+├── routes/
+│   └── web.php                         # Konfigurasi rute URL aplikasi
+│
+├── tests/
+│   └── Feature/
+│       └── HotelBookingTest.php        # Unit & Feature Test otomatis seluruh KUK BNSP
+│
+├── .env                                # Konfigurasi environment (SQLite/MySQL)
+├── composer.json                       # Konfigurasi dependensi package PHP
+└── README.md                           # Dokumentasi teknis proyek
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🛠️ Persyaratan Lingkungan & Cara Menjalankan
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Persyaratan Minimum:
+- **PHP:** Versi 8.2 / 8.3 / 8.4 / 8.5
+- **Web Server:** XAMPP / Laragon / Built-in PHP CLI Server
+- **Database:** SQLite (default bawaan) atau MySQL
 
-## Code of Conduct
+### Langkah Menjalankan Aplikasi:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Migrasi Database:**
+   ```bash
+   php artisan migrate
+   ```
 
-## Security Vulnerabilities
+2. **Jalankan Server Lokal:**
+   ```bash
+   php artisan serve
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. **Akses di Browser:**
+   Buka peramban web dan arahkan ke alamat:
+   ```text
+   http://127.0.0.1:8000
+   ```
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Menjalankan Pengujian Otomatis (PHPUnit):**
+   ```bash
+   php artisan test
+   ```
+   *Seluruh 9 feature test pengujian validasi, formula hitung total, dan alur aplikasi dinyatakan 100% lulus.*

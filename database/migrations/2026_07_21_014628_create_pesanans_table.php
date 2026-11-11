@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('nomor_identitas');
-            $table->enum('tipe_kamar', ['Standard', 'Deluxe', 'Family']);
+            $table->string('tipe_kamar', 50);
             $table->decimal('harga', 10, 2);
             $table->integer('durasi_menginap');
             $table->boolean('termasuk_breakfast');

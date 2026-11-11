@@ -1,567 +1,619 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pemesanan Hotel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Form Pemesanan — Grand Hotel Nusantara</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #818cf8;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius: 16px;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --navy: #0c1a2e;
+            --navy-mid: #162540;
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --gold-pale: #f9f3e3;
+            --cream: #fdfaf4;
+            --muted: #8a9ab5;
+            --border: #d8e0ed;
+            --text: #1a2540;
+            --radius: 4px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f3f8;
             color: var(--text);
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.06) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.05) 0px, transparent 50%);
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeInDown 0.6s ease;
-        }
-
-        .header-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        }
-
-        .header-icon svg {
-            width: 32px;
-            height: 32px;
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease 0.1s both;
-            border: 1px solid rgba(226, 232, 240, 0.6);
-        }
-
-        .card-body {
-            padding: 2rem;
-        }
-
-        .alert {
-            padding: 1rem 1.25rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            font-size: 0.9rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        .alert-danger {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #991b1b;
-        }
-
-        .alert-success {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-        }
-
-        .alert svg {
-            flex-shrink: 0;
-            width: 20px;
-            height: 20px;
-            margin-top: 1px;
-        }
-
-        .alert ul {
             margin: 0;
-            padding-left: 1.2rem;
+            min-height: 100vh;
         }
 
-        .alert ul li {
-            margin-bottom: 0.25rem;
+        /* ── NAVBAR ── */
+        .navbar-luxury {
+            background: var(--navy);
+            padding: 0;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.3);
         }
-
-        .alert ul li:last-child {
-            margin-bottom: 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-        }
-
-        @media (max-width: 640px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .required {
-            color: var(--danger);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            color: var(--text);
-            background: #fafbfc;
-            transition: all 0.2s ease;
-            outline: none;
-        }
-
-        .form-control:hover {
-            border-color: #cbd5e1;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-
-        .form-control::placeholder {
-            color: #94a3b8;
-        }
-
-        .form-control[readonly] {
-            background: #f1f5f9;
-            color: var(--text-muted);
-            cursor: default;
-        }
-
-        select.form-control {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .radio-option {
-            position: relative;
-        }
-
-        .radio-option input {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .radio-option label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: all 0.2s ease;
-            background: #fafbfc;
-        }
-
-        .radio-option label:hover {
-            border-color: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .radio-option input:checked + label {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.06);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .radio-option label svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: #fafbfc;
-        }
-
-        .checkbox-wrapper:hover {
-            border-color: var(--primary-light);
-        }
-
-        .checkbox-wrapper input {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--primary);
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .checkbox-wrapper label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .checkbox-wrapper .price-tag {
-            margin-left: auto;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--success);
-            background: rgba(16, 185, 129, 0.1);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-        }
-
-        .total-section {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border: 2px solid var(--primary);
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .total-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-        }
-
-        .total-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
-
-        .total-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            letter-spacing: -0.02em;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn-secondary {
-            background: #f1f5f9;
-            color: var(--text-muted);
-            border: 1.5px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: #e2e8f0;
-            color: var(--text);
-            transform: translateY(-1px);
-        }
-
-        .btn-calc {
-            background: white;
-            color: var(--primary);
-            border: 1.5px solid var(--primary);
-        }
-
-        .btn-calc:hover {
-            background: rgba(99, 102, 241, 0.06);
-            transform: translateY(-1px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .room-info {
+        .navbar-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            background: rgba(99, 102, 241, 0.04);
+            padding: 0 2rem;
+            height: 68px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--navy);
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .brand-sub {
+            font-size: 0.6rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-nav {
+            padding: 7px 18px;
+            border-radius: 50px;
             font-size: 0.8rem;
-            color: var(--text-muted);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-nav-ghost {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .btn-nav-ghost:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+        .btn-nav-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            font-weight: 600;
+        }
+        .btn-nav-gold:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: var(--navy);
         }
 
-        .room-info.hidden {
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            padding: 2.5rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-header-label {
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 6px;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        .gold-divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 14px auto 0;
+        }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 32px rgba(12,26,46,0.10);
+            overflow: hidden;
+            max-width: 700px;
+            margin: 2rem auto 3rem;
+        }
+        .form-card-header {
+            background: linear-gradient(90deg, var(--navy) 0%, #1e3a5f 100%);
+            padding: 1.1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-card-header .header-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(201,168,76,0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 0.85rem;
+        }
+        .form-card-header h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .form-card-body {
+            padding: 2rem 2.25rem 2.25rem;
+        }
+
+        /* ── FORM FIELDS ── */
+        .field-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            align-items: start;
+            gap: 10px;
+            margin-bottom: 1.1rem;
+        }
+        .field-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--navy);
+            padding-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .field-label .req {
+            color: var(--gold);
+            margin-left: 2px;
+        }
+        .form-control, .form-select {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 9px 13px;
+            font-size: 0.88rem;
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fff;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+            outline: none;
+        }
+        .form-control.readonly-field {
+            background: var(--gold-pale);
+            border-color: rgba(201,168,76,0.3);
+            color: var(--navy);
+            font-weight: 600;
+        }
+        .input-group-text {
+            background: var(--gold-pale);
+            border-color: var(--border);
+            color: var(--navy);
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 8px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+        }
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--gold);
+        }
+        .radio-option label {
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .checkbox-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-top: 8px;
+        }
+        .checkbox-wrap input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+        .checkbox-label {
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .breakfast-note {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+        .error-msg {
+            font-size: 0.75rem;
+            color: #d94040;
+            font-weight: 600;
+            margin-top: 4px;
             display: none;
         }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .input-error {
+            border-color: #d94040 !important;
+            background: #fff8f8 !important;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ── TOTAL DISPLAY ── */
+        .total-display {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 100%);
+            border-radius: 8px;
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .total-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 600;
+        }
+        .total-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            transition: all 0.25s ease;
+        }
+        .total-amount.bump {
+            transform: scale(1.04);
+            color: #fff;
+        }
+        .total-breakdown {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 3px;
+            min-height: 1em;
+        }
+        .total-hidden { display: none; }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            border: none;
+            border-top: 1px dashed var(--border);
+            margin: 1.5rem 0;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+        /* ── BUTTONS ── */
+        .btn-calculate {
+            background: transparent;
+            color: var(--navy);
+            border: 1px solid rgba(12, 26, 46, 0.25);
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
         }
+        .btn-calculate:hover {
+            border-color: var(--navy);
+            background: var(--navy);
+            color: #fff;
+        }
+        .btn-save {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            border: none;
+            padding: 10px 28px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .btn-save:hover { background: linear-gradient(135deg, var(--gold-light), var(--gold)); transform: translateY(-1px); }
+
+        .btn-reset {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 10px 22px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .btn-reset:hover { border-color: var(--navy); color: var(--navy); }
+
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-top: 0.5rem;
+        }
+
+        /* ── ALERT ── */
+        .alert-luxury {
+            background: #fff3f3;
+            border: 1px solid #fca5a5;
+            border-left: 3px solid #ef4444;
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .alert-luxury .alert-title {
+            font-weight: 700;
+            color: #991b1b;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+        .alert-luxury ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            font-size: 0.82rem;
+            color: #b91c1c;
+        }
+
+        /* ── ROOM PREVIEW ── */
+        .room-preview {
+            display: none;
+            background: var(--gold-pale);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: var(--radius);
+            padding: 10px 14px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--navy);
+        }
+        .room-preview.show { display: block; }
+        .room-preview strong { color: var(--gold); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-            </div>
-            <h1>Form Pemesanan Hotel</h1>
-            <p>Isi detail pemesanan Anda dengan mudah dan cepat</p>
-        </div>
 
-        <div class="card">
-            <div class="card-body">
+    <!-- NAVBAR -->
+    <nav class="navbar-luxury">
+        <div class="navbar-inner">
+            <a href="{{ url('/') }}" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-hotel"></i></div>
+                <div class="brand-text">
+                    <span class="brand-name">Grand Nusantara</span>
+                    <span class="brand-sub">Luxury Hotel & Resort</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="{{ url('/') }}" class="btn-nav btn-nav-ghost"><i class="fa-solid fa-house me-1"></i> Beranda</a>
+                <a href="{{ route('pesanan.index') }}" class="btn-nav btn-nav-gold"><i class="fa-solid fa-list me-1"></i> Data Pesanan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <p class="page-header-label"><i class="fa-solid fa-star me-1"></i> Reservasi Eksklusif</p>
+        <h1>Form Pemesanan Kamar</h1>
+        <p>Lengkapi formulir di bawah untuk memesan kamar Anda</p>
+        <div class="gold-divider"></div>
+    </div>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="header-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h5>Detail Pemesanan</h5>
+            </div>
+
+            <div class="form-card-body">
                 @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                        </svg>
-                        <ul class="mb-0">
-                            @foreach($errors->all() as $error)
+                    <div class="alert-luxury">
+                        <div class="alert-title"><i class="fa-solid fa-triangle-exclamation me-2"></i>Perbaiki kesalahan berikut:</div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
 
-                @if(session('success'))
-                    <div class="alert alert-success" role="alert">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('pesanan.store') }}">
+                <form action="{{ route('pesanan.store') }}" method="POST" id="bookingForm" onsubmit="return validateFormSubmit(event)">
                     @csrf
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nama" class="form-label">Nama Pemesan <span class="required">*</span></label>
-                            <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap" required>
+                    <!-- 1. Nama Pemesan -->
+                    <div class="field-row">
+                        <div class="field-label">Nama Pemesan <span class="req">*</span></div>
+                        <div>
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                   value="{{ old('nama') }}" placeholder="Masukkan nama lengkap"
+                                   oninput="validateNamaInput(this)" onkeypress="return blockNumbers(event)" required>
+                            <div id="namaError" class="error-msg"><i class="fa-solid fa-xmark me-1"></i>Nama tidak boleh mengandung angka</div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Jenis Kelamin <span class="required">*</span></label>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" name="kelamin" id="kelamin_laki" value="Laki-laki" {{ old('kelamin') == 'Laki-laki' ? 'checked' : '' }}>
-                                    <label for="kelamin_laki">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                                        Laki-laki
-                                    </label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="kelamin" id="kelamin_perempuan" value="Perempuan" {{ old('kelamin') == 'Perempuan' ? 'checked' : '' }}>
-                                    <label for="kelamin_perempuan">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                                        Perempuan
-                                    </label>
-                                </div>
+                    <!-- 2. Jenis Kelamin -->
+                    <div class="field-row">
+                        <div class="field-label">Jenis Kelamin <span class="req">*</span></div>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="kelamin" id="kelamin_l" value="Laki-laki"
+                                       {{ old('kelamin', 'Laki-laki') == 'Laki-laki' ? 'checked' : '' }} required>
+                                <label for="kelamin_l">Laki-laki</label>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="kelamin" id="kelamin_p" value="Perempuan"
+                                       {{ old('kelamin') == 'Perempuan' ? 'checked' : '' }} required>
+                                <label for="kelamin_p">Perempuan</label>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nomor Identitas -->
+                    <div class="field-row">
+                        <div class="field-label">Nomor Identitas <span class="req">*</span></div>
+                        <div>
+                            <input type="text" class="form-control" id="nomor_identitas" name="nomor_identitas"
+                                   maxlength="16" value="{{ old('nomor_identitas') }}"
+                                   placeholder="16 digit NIK" oninput="this.value = this.value.replace(/\D/g, ''); validateIdentityInput();"
+                                   onblur="validateNikBlur(this)" onkeypress="return isNumberKey(event)" required>
+                            <div id="identitasError" class="error-msg"><i class="fa-solid fa-xmark me-1"></i>isian salah..data harus 16 digit</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Tipe Kamar -->
+                    <div class="field-row">
+                        <div class="field-label">Tipe Kamar <span class="req">*</span></div>
+                        <div>
+                            <select class="form-select" id="tipe_kamar" name="tipe_kamar"
+                                    onchange="updateHargaDanKalkulasi()" required>
+                                <option value="">— Pilih Tipe Kamar —</option>
+                                <option value="Standar" {{ old('tipe_kamar') == 'Standar' || old('tipe_kamar') == 'Standard' ? 'selected' : '' }}>STANDAR — Rp 500.000 / malam</option>
+                                <option value="Deluxe"  {{ old('tipe_kamar') == 'Deluxe' ? 'selected' : '' }}>DELUXE — Rp 1.000.000 / malam</option>
+                                <option value="Family"  {{ old('tipe_kamar') == 'Family' || old('tipe_kamar') == 'Executive' || old('tipe_kamar') == 'Executif' ? 'selected' : '' }}>FAMILY / EXECUTIF — Rp 1.500.000 / malam</option>
+                            </select>
+                            <div id="roomPreview" class="room-preview"></div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Harga -->
+                    <div class="field-row">
+                        <div class="field-label">Harga / Malam</div>
+                        <div>
+                            <input type="text" class="form-control readonly-field" id="harga_display" readonly placeholder="Rp 0">
+                            <input type="hidden" id="harga" name="harga" value="{{ old('harga', 0) }}">
+                        </div>
+                    </div>
+
+                    <!-- 6. Tanggal Pesan -->
+                    <div class="field-row">
+                        <div class="field-label">Tanggal Pesan <span class="req">*</span></div>
+                        <div>
+                            <input type="date" class="form-control" id="tanggal_pesan" name="tanggal_pesan"
+                                   value="{{ old('tanggal_pesan', date('Y-m-d')) }}" min="{{ date('Y-m-d') }}" required>
+                        </div>
+                    </div>
+
+                    <!-- 7. Durasi Menginap -->
+                    <div class="field-row">
+                        <div class="field-label">Durasi Menginap <span class="req">*</span></div>
+                        <div>
+                            <div class="input-group">
+                                <input type="text" inputmode="numeric" class="form-control" id="durasi_menginap" name="durasi_menginap"
+                                       value="{{ old('durasi_menginap', 3) }}"
+                                       oninput="this.value = this.value.replace(/\D/g, ''); validateDurasiInput(); kalkulasiTotal(false);"
+                                       onkeypress="return isNumberKey(event)" required>
+                                <span class="input-group-text">Malam</span>
                             </div>
+                            <div id="durasiError" class="error-msg"><i class="fa-solid fa-xmark me-1"></i>harus isi angka</div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="nomor_identitas" class="form-label">Nomor Identitas <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="nomor_identitas" name="nomor_identitas" value="{{ old('nomor_identitas') }}" placeholder="Contoh: 3175xxxxxxxxxxxx" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tipe_kamar" class="form-label">Tipe Kamar <span class="required">*</span></label>
-                        <select class="form-control" id="tipe_kamar" name="tipe_kamar" required>
-                            <option value="">-- Pilih Tipe Kamar --</option>
-                            <option value="Standard" {{ old('tipe_kamar') == 'Standard' ? 'selected' : '' }}>Standard</option>
-                            <option value="Deluxe" {{ old('tipe_kamar') == 'Deluxe' ? 'selected' : '' }}>Deluxe</option>
-                            <option value="Family" {{ old('tipe_kamar') == 'Family' ? 'selected' : '' }}>Family</option>
-                        </select>
-                        <div class="room-info hidden" id="roomInfo">
-                            <span id="roomDesc">Pilih tipe kamar untuk melihat detail</span>
-                            <span id="roomPrice" style="font-weight:600;color:var(--primary);"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="harga" class="form-label">Harga per Malam</label>
-                            <input type="text" class="form-control" id="harga" name="harga" readonly placeholder="Rp 0">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tanggal_pesan" class="form-label">Tanggal Pemesanan <span class="required">*</span></label>
-                            <input type="date" class="form-control" id="tanggal_pesan" name="tanggal_pesan" value="{{ old('tanggal_pesan') }}" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="durasi_menginap" class="form-label">Durasi Menginap <span class="required">*</span></label>
-                            <input type="number" class="form-control" id="durasi_menginap" name="durasi_menginap" min="1" value="{{ old('durasi_menginap') }}" placeholder="Jumlah malam" required>
-                        </div>
-
-                        <div class="form-group" style="display:flex;align-items:flex-end;">
-                            <div class="checkbox-wrapper" style="width:100%;">
-                                <input type="checkbox" id="termasuk_breakfast" name="termasuk_breakfast" value="1" {{ old('termasuk_breakfast') ? 'checked' : '' }}>
-                                <label for="termasuk_breakfast">Termasuk Breakfast</label>
-                                <span class="price-tag">+Rp 50.000</span>
+                    <!-- 8. Termasuk Breakfast -->
+                    <div class="field-row">
+                        <div class="field-label">Breakfast</div>
+                        <div>
+                            <div class="checkbox-wrap">
+                                <input type="checkbox" id="termasuk_breakfast" name="termasuk_breakfast"
+                                       value="1" {{ old('termasuk_breakfast', '1') == '1' ? 'checked' : '' }}
+                                       onchange="kalkulasiTotal(false)">
+                                <label class="checkbox-label" for="termasuk_breakfast">Termasuk Sarapan Pagi</label>
                             </div>
+                            <div class="breakfast-note" id="breakfastNote">Tambahan Rp 80.000 / malam jika dipilih</div>
                         </div>
                     </div>
 
-                    <div class="total-section">
-                        <div class="total-label">Total Pembayaran</div>
-                        <div class="total-value" id="total_bayar">Rp 0</div>
+                    <hr class="section-divider">
+
+                    <!-- 9. Total Bayar -->
+                    <div class="field-row" style="align-items:center;">
+                        <div class="field-label">Total Bayar</div>
+                        <div>
+                            <div class="total-display">
+                                <div>
+                                    <div class="total-label">Total Pembayaran</div>
+                                    <div class="total-amount" id="total_display">Rp 0</div>
+                                </div>
+                                <i class="fa-solid fa-coins" style="color:var(--gold-light);font-size:1.6rem;opacity:0.6"></i>
+                            </div>
+                            <input type="hidden" id="total_bayar" name="total_bayar" value="{{ old('total_bayar', 0) }}">
+                        </div>
                     </div>
 
-                    <div class="btn-group">
-                        <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                            Kembali
-                        </a>
-                        <button type="button" class="btn btn-calc" id="btnHitung">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            Hitung Total
+                    <!-- 10. Tombol Aksi -->
+                    <div class="action-bar mt-3">
+                        <button type="submit" class="btn-save" id="btnSimpan">
+                            <i class="fa-solid fa-floppy-disk"></i> Simpan Pesanan
                         </button>
-                        <button type="submit" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            Simpan Pesanan
+                        <button type="button" class="btn-reset" onclick="resetForm()">
+                            <i class="fa-solid fa-rotate-left"></i> Cancel
                         </button>
                     </div>
                 </form>
@@ -569,61 +621,231 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const hargaInput = document.getElementById('harga');
-        const tipeKamarSelect = document.getElementById('tipe_kamar');
-        const durasiInput = document.getElementById('durasi_menginap');
-        const breakfastCheckbox = document.getElementById('termasuk_breakfast');
-        const totalDisplay = document.getElementById('total_bayar');
-        const hitungButton = document.getElementById('btnHitung');
-        const roomInfo = document.getElementById('roomInfo');
-        const roomDesc = document.getElementById('roomDesc');
-        const roomPrice = document.getElementById('roomPrice');
-
         const hargaMap = {
-            'Standard': { harga: 500000, desc: 'Kamar nyaman dengan fasilitas standar' },
-            'Deluxe': { harga: 1000000, desc: 'Kamar luas dengan pemandangan indah' },
-            'Family': { harga: 1500000, desc: 'Kamar besar untuk keluarga' }
+            'Standar':   500000,
+            'Standard':  500000,
+            'Deluxe':   1000000,
+            'Family':   1500000,
+            'Executive':1500000,
+            'Executif': 1500000
         };
 
-        function formatRupiah(angka) {
-            return 'Rp ' + angka.toLocaleString('id-ID');
+        const roomDesc = {
+            'Standar':  { desc: 'Kamar nyaman dengan fasilitas standar. Cocok untuk perjalanan bisnis.', beds: '1 Kasur Queen', size: '28 m²' },
+            'Deluxe':   { desc: 'Kamar luas dengan pemandangan kota dan fasilitas premium.', beds: '1 Kasur King', size: '36 m²' },
+            'Family':   { desc: 'Suite mewah dengan ruang keluarga dan fasilitas eksekutif terlengkap.', beds: '2 Kasur Queen', size: '52 m²' },
+            'Executive':   { desc: 'Suite mewah dengan ruang keluarga dan fasilitas eksekutif terlengkap.', beds: '2 Kasur Queen', size: '52 m²' }
+        };
+
+        function fmt(num) {
+            return 'Rp ' + Math.round(num).toLocaleString('id-ID');
         }
 
-        function setHargaFromTipeKamar() {
-            const tipe = tipeKamarSelect.value;
-            if (tipe && hargaMap[tipe]) {
-                hargaInput.value = formatRupiah(hargaMap[tipe].harga);
-                roomDesc.textContent = hargaMap[tipe].desc;
-                roomPrice.textContent = formatRupiah(hargaMap[tipe].harga) + '/malam';
-                roomInfo.classList.remove('hidden');
+        function updateHargaDanKalkulasi() {
+            const tipe = document.getElementById('tipe_kamar').value;
+            const harga = hargaMap[tipe] || 0;
+            document.getElementById('harga').value = harga;
+            document.getElementById('harga_display').value = harga > 0 ? Math.round(harga).toLocaleString('id-ID') : '';
+
+            const preview = document.getElementById('roomPreview');
+            const tipeKey = tipe === 'Standard' ? 'Standar' : tipe;
+            if (tipe && roomDesc[tipeKey]) {
+                const r = roomDesc[tipeKey];
+                preview.innerHTML = `<strong>${tipe.toUpperCase()}</strong> &mdash; ${r.desc} &nbsp;|&nbsp; ${r.beds} &nbsp;|&nbsp; ${r.size}`;
+                preview.classList.add('show');
             } else {
-                hargaInput.value = '';
-                roomInfo.classList.add('hidden');
+                preview.classList.remove('show');
             }
-            hitungTotal();
+            kalkulasiTotal(false);
         }
 
-        function hitungTotal() {
-            const tipe = tipeKamarSelect.value;
-            const harga = tipe && hargaMap[tipe] ? hargaMap[tipe].harga : 0;
-            const durasi = parseInt(durasiInput.value) || 0;
-            let total = harga * durasi;
-
-            if (breakfastCheckbox.checked) {
-                total += 50000;
+        function isNumberKey(evt) {
+            const charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
             }
-
-            totalDisplay.textContent = formatRupiah(total);
+            return true;
         }
 
-        tipeKamarSelect.addEventListener('change', setHargaFromTipeKamar);
-        durasiInput.addEventListener('input', hitungTotal);
-        breakfastCheckbox.addEventListener('change', hitungTotal);
-        hitungButton.addEventListener('click', hitungTotal);
+        function blockNumbers(evt) {
+            const charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode >= 48 && charCode <= 57) {
+                const err = document.getElementById('namaError');
+                if (err) {
+                    err.style.display = 'block';
+                    setTimeout(() => { if (!/\d/.test(document.getElementById('nama').value)) err.style.display = 'none'; }, 2000);
+                }
+                return false;
+            }
+            return true;
+        }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            setHargaFromTipeKamar();
+        function validateNamaInput(input) {
+            const err = document.getElementById('namaError');
+            if (/\d/.test(input.value)) {
+                if (err) err.style.display = 'block';
+                input.value = input.value.replace(/\d/g, '');
+            } else {
+                if (err) err.style.display = 'none';
+            }
+        }
+
+        function getBreakfastFee(durasi, hasBreakfast) {
+            if (!hasBreakfast || durasi <= 0) return 0;
+            return 80000 * durasi;
+        }
+
+        function validateIdentityInput() {
+            const input = document.getElementById('nomor_identitas');
+            const errorDiv = document.getElementById('identitasError');
+            const val = input.value.trim();
+            const isNumeric = /^\d+$/.test(val);
+            if (val.length === 16 && isNumeric) {
+                input.classList.remove('input-error');
+                errorDiv.style.display = 'none';
+                return true;
+            } else if (val.length > 0 && (!isNumeric || val.length > 16)) {
+                input.classList.add('input-error');
+                errorDiv.style.display = 'block';
+                return false;
+            }
+            return false;
+        }
+
+        // Tampil error NIK saat user pindah ke field lain (blur) jika kurang dari 16 digit
+        function validateNikBlur(input) {
+            const errorDiv = document.getElementById('identitasError');
+            const val = input.value.trim();
+            if (val.length > 0 && val.length < 16) {
+                input.classList.add('input-error');
+                errorDiv.style.display = 'block';
+            } else if (val.length === 16) {
+                input.classList.remove('input-error');
+                errorDiv.style.display = 'none';
+            }
+        }
+
+        function validateDurasiInput() {
+            const input = document.getElementById('durasi_menginap');
+            const errorDiv = document.getElementById('durasiError');
+            const num = parseInt(input.value.trim(), 10);
+            if (isNaN(num) || num <= 0) {
+                input.classList.add('input-error');
+                errorDiv.style.display = 'block';
+                return false;
+            }
+            input.classList.remove('input-error');
+            errorDiv.style.display = 'none';
+            return true;
+        }
+
+        function kalkulasiTotal(showAlert = false) {
+            const tipe   = document.getElementById('tipe_kamar').value;
+            const harga  = parseInt(document.getElementById('harga').value, 10) || 0;
+            const durasi = parseInt(document.getElementById('durasi_menginap').value, 10) || 0;
+            const hasBreakfast = document.getElementById('termasuk_breakfast').checked;
+
+            if (!tipe || durasi <= 0) {
+                document.getElementById('total_display').textContent = 'Rp 0';
+                document.getElementById('total_bayar').value = 0;
+                if (showAlert) {
+                    if (!tipe) alert('Peringatan: Silakan pilih Tipe Kamar terlebih dahulu!');
+                    else if (durasi <= 0) alert('Peringatan: harus isi angka');
+                }
+                return false;
+            }
+
+            const subtotal     = harga * durasi;
+            const discount     = durasi >= 3 ? subtotal * 0.10 : 0;
+            const breakfastFee = getBreakfastFee(durasi, hasBreakfast);
+            const total        = subtotal - discount + breakfastFee;
+
+            document.getElementById('total_display').textContent = fmt(total);
+            document.getElementById('total_bayar').value = total;
+
+            // Update breakfast note
+            const note = document.getElementById('breakfastNote');
+            if (hasBreakfast && durasi > 0) {
+                note.textContent = `Breakfast: ${fmt(breakfastFee)} (${durasi} malam × Rp 80.000)`;
+            } else {
+                note.textContent = 'Tambahan Rp 80.000 / malam jika dipilih';
+            }
+
+            if (showAlert) {
+                const breakfastLine = hasBreakfast
+                    ? `Breakfast (${durasi} malam × Rp 80.000): ${fmt(breakfastFee)}`
+                    : 'Breakfast: Tidak';
+                alert(
+                    `✦ Rincian Total Bayar ✦\n\n` +
+                    `Tarif Kamar : ${fmt(harga)} / malam\n` +
+                    `Durasi      : ${durasi} malam\n` +
+                    `Subtotal    : ${fmt(subtotal)}\n` +
+                    `Diskon 10%  : ${durasi >= 3 ? '- ' + fmt(discount) : 'Tidak berlaku (< 3 malam)'}\n` +
+                    `${breakfastLine}\n` +
+                    `─────────────────────\n` +
+                    `TOTAL BAYAR : ${fmt(total)}`
+                );
+            }
+            return true;
+        }
+
+        function resetForm() {
+            document.getElementById('bookingForm').reset();
+            document.getElementById('harga').value = 0;
+            document.getElementById('harga_display').value = '';
+            document.getElementById('total_bayar').value = 0;
+            document.getElementById('total_display').textContent = 'Rp 0';
+            document.getElementById('identitasError').style.display = 'none';
+            document.getElementById('durasiError').style.display = 'none';
+            const errNama = document.getElementById('namaError');
+            if (errNama) errNama.style.display = 'none';
+            document.getElementById('nama').classList.remove('input-error');
+            document.getElementById('nomor_identitas').classList.remove('input-error');
+            document.getElementById('durasi_menginap').classList.remove('input-error');
+            document.getElementById('roomPreview').classList.remove('show');
+            document.getElementById('breakfastNote').textContent = 'Tambahan Rp 80.000 / malam jika dipilih';
+        }
+
+        function validateFormSubmit(e) {
+            const nama  = document.getElementById('nama');
+            const nik   = document.getElementById('nomor_identitas');
+            const dur   = document.getElementById('durasi_menginap');
+            const tipe  = document.getElementById('tipe_kamar');
+
+            if (!nama.value.trim() || /\d/.test(nama.value)) {
+                alert('Peringatan: Nama pemesan tidak boleh kosong dan tidak boleh mengandung angka!');
+                nama.classList.add('input-error');
+                const errNama = document.getElementById('namaError');
+                if (errNama) errNama.style.display = 'block';
+                nama.focus(); e.preventDefault(); return false;
+            }
+
+            if (!tipe.value) {
+                alert('Peringatan: Tipe Kamar harus dipilih!');
+                tipe.focus(); e.preventDefault(); return false;
+            }
+            const valNik = nik.value.trim();
+            if (valNik.length !== 16 || !/^\d+$/.test(valNik)) {
+                alert('isian salah..data harus 16 digit');
+                nik.classList.add('input-error');
+                document.getElementById('identitasError').style.display = 'block';
+                nik.focus(); e.preventDefault(); return false;
+            }
+            const valDur = parseInt(dur.value, 10);
+            if (isNaN(valDur) || valDur <= 0) {
+                alert('harus isi angka');
+                dur.classList.add('input-error');
+                document.getElementById('durasiError').style.display = 'block';
+                dur.focus(); e.preventDefault(); return false;
+            }
+            kalkulasiTotal(false);
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHargaDanKalkulasi();
         });
     </script>
 </body>
